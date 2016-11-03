@@ -1,0 +1,55 @@
+<html>
+		<head> 
+		    <title>Edward Lee</title> 
+		     <script language="JavaScript">
+			  function date() {
+				  days = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+				  monthes = new Array("1", "2", "3", "4", "5", "6",
+									"7", "8", "9", "10", "11", "12");
+				  now = new Date();
+				  year = now.getFullYear();	
+				  month = now.getMonth();
+				  date = now.getDate();
+				  day = now.getDay();
+				  dateStr = year + "年 " + monthes[month] + "月 " + date + "日, " + days[day];
+				  document.clock.date.value = dateStr;
+			  }
+			  function time() {
+				 now = new Date();
+				 hours = now.getHours();
+				 minutes = now.getMinutes();
+				 seconds = now.getSeconds();
+				 timeStr = "" + hours + "时 ";
+				 timeStr += ((minutes < 10) ? ":0" : ":") + minutes + "分 ";
+				 timeStr += ((seconds < 10) ? ":0" : ":") + seconds + "秒 ";
+				 document.clock.time.value = timeStr;
+			  }
+			setInterval("time()", 1000); // 循环每秒定时调用
+		    </script>
+		</head>
+
+
+		<boby>
+            <body background="bj.png"></body>
+            <h1 align="center">
+            	<font face="宋体" color="red">个&nbsp;人&nbsp;介&nbsp;绍</font>
+            </h1>
+
+            <h2 align="left">
+                <a href="http://weibo.com/2426992271/profile?rightmod=1&wvr=6&mod=personinfo">
+                <font face="黑体" color="white">微&nbsp;&nbsp;博</font>
+                </a>
+            </h2>
+
+
+
+          
+	
+	       <body onLoad="date(); time();">
+		       <form name=clock>
+			        Date:<input type="text" name="date" size="18" value=""> <br/>
+			        Time:<input type="text" name="time" size="10" value=""> <br/>
+		       </form>
+		    </body>
+       </body>
+</html>
