@@ -1,5 +1,5 @@
 /*
- * Weight-priority solution
+ * divide-priority solution
  */
 
 #include <stdio.h>
@@ -44,7 +44,7 @@ void init()
 	items[0].value = 0;
 	items[0].choice = 0;
 	for(i = 1; i < SIZE; ++i){
-		items[i].weight = (rand() % W_CTRL);
+		items[i].weight = (rand() % W_CTRL) + 1;
 		items[i].value = (rand() % V_CTRL);
 		items[i].choice = 0;
 		items[i].divide = (int)(items[i].value / items[i].weight);
