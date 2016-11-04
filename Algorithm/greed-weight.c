@@ -1,5 +1,5 @@
-/*
- * Value-priority solution
+/* 
+ * Weight-priority solution
  */
 
 #include <stdio.h>
@@ -8,7 +8,7 @@
 #define SIZE (100 + 1)
 #define W_CTRL 100
 #define V_CTRL 100
-#define BAG_SIZE 1000
+#define BAG_SIZE 1000 
 #define L_CHILD(i) (2 * i)
 #define R_CHILD(i) (2 * i + 1)
 
@@ -68,15 +68,15 @@ void heap_modify(int cur, int length)
 	int max = cur;
 	int leftchild = L_CHILD(cur);
 	int rightchild = R_CHILD(cur);
-	if((rightchild < length) && (items[leftchild].value >= items[rightchild].value))
+	if((rightchild < length) && (items[leftchild].weight >= items[rightchild].weight))
 		max = leftchild;
-	else if((leftchild < length) && (items[rightchild].value >= items[leftchild].value))
+	else if((leftchild < length) && (items[rightchild].weight >= items[leftchild].weight))
 		max = rightchild;
 	if(rightchild == length)
 		max = leftchild;
 
 	if(max != cur){
-		if(items[max].value > items[cur].value){
+		if(items[max].weight > items[cur].weight){
 			swap(cur, max);
 			heap_modify(max, length);
 		}
