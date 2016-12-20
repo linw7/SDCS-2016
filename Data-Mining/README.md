@@ -437,7 +437,17 @@
 	在第一步中，通过r<sub>1</sub>⋉r<sub>2</sub>选出了r<sub>1</sub>中对r<sub>1</sub>⋈r<sub>2</sub>有贡献的那些元组，在第三步中，temp<sub>2</sub>=r<sub>2</sub>⋉r<sub>2</sub>，选出了r<sub>2</sub>中对r<sub>1</sub>⋈r<sub>2</sub>有贡献的那些元组。
 	
 	对于具有多个关系的连接来说，也可以分拆成多个半连接策略来实现，从而减少额外开销。
-			
+	
+#### 利用并行性的连接策略
+
+假设有4个关系的连接：
+
+- r<sub>1</sub>⋈r<sub>2</sub>⋈r<sub>3</sub>⋈r<sub>4</sub>
+
+其中r<sub>i</sub>存储在S<sub>i</sub>上。可以先将r<sub>1</sub>从S<sub>1</sub>送到S<sub>2</sub>计算r<sub>1</sub>⋈r<sub>2</sub>，同时将r<sub>3</sub>从S<sub>3</sub>送到S<sub>4</sub>计算r<sub>3</sub>⋈r<sub>4</sub>。在计算r<sub>1</sub>⋈r<sub>2</sub>的过程中将已经计算好的元组发送到S<sub>1</sub>，而不用等全部连接计算完成。另一边的S<sub>4</sub>也是同理。
+
+一旦r<sub>1</sub>⋈r<sub>2</sub>和r<sub>3</sub>⋈r<sub>4</sub>到达S<sub>1</sub>就可以开始计算(r<sub>1</sub>⋈r<sub>2</sub>)⋈(r<sub>3</sub>⋈r<sub>4</sub>)。因此，S<sub>1</sub>上的结果可以同S<sub>2</sub>和S<sub>4</sub>的计算并行进行。
+
 ---
 
 ## 数据预处理
