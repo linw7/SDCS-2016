@@ -115,13 +115,89 @@ T(n) = n•log<sub>2</sub>n - n + 1
 
 类似数学归纳法，先找到小规模时候求解方法，再考虑规模增大时求解方法，找到递归函数式之后设计递归程序即可。
 
+### 基本框架
+
+列出三个经典分治算法（归并排序、快速排序和最大子串和）的主体部分用作例子：
+
+1. 归并排序：
+
+		void mergesort(int a[], int first, int last, int temp[])
+		{
+
+			if (first < last)
+			{
+				int mid = (first + last) / 2;
+				mergesort(a, first, mid, temp);    //左边有序
+				mergesort(a, mid + 1, last, temp); //右边有序
+				mergearray(a, first, mid, last, temp); //再将二个有序数列合并
+			}
+		}
+		
+2. 快速排序：
+
+		void quick_sort1(int s[], int l, int r)
+		{
+			if (l < r)
+    		{
+				int i = adjustarray(s, l, r);//先成挖坑填数法调整s[]
+				quick_sort1(s, l, i - 1);    //递归调用 
+				quick_sort1(s, i + 1, r);
+			}
+		}
+		
+3. 最大子序列和：
+
+		int MaxSubSum(int A[], int Left, int Right)
+		{	
+			if (Left == Right)    //递归的基准情形
+        		return a[Left];
+
+    		int Center, MaxLeftSum, MaxRightSum;
+    		Center = (Left + Right) / 2;   //求分界点
+  
+    		MaxLeftSum = MaxSubSum(A, Left, Center);    //递归左子序列
+    		MaxRightSum = MaxSubSum(A, Center + 1, Right);  //递归右子序列
+    		
+    		int MaxLeftBorderSum = A[Center], LeftBorderSum = A[Center];
+    		for (int i = Center - 1; i >= Left; --i) {
+       			LeftBorderSum += A[i];
+        		if (LeftBorderSum > MaxLeftBorderSum)
+            		MaxLeftBorderSum = LeftBorderSum;
+    		}
+
+    		int MaxRightBorderSum = A[Center + 1], RightBorderSum = A[Center + 1];
+    		for (int i = Center + 2; i <= Right; ++i) {
+        		RightBorderSum += A[i];
+        		if (RightBorderSum > MaxRightBorderSum)
+           			MaxRightBorderSum = RightBorderSum;
+    		}
+
+    		//返回最大值
+    		return Max3(MaxLeftSum, MaxRightSum, MaxLeftBorderSum + MaxRightBorderSum);
+		}
+
+因为分治算法要结合递归来写，所以通常的分治算法框架是：
+
+1. 判断语句，递归结束条件。
+
+2. 划分点计算。
+
+3. 划分点左部分递归。
+
+4. 划分点右部分递归。
+
+5. 综合两侧答案。
+
+从上面三个例子来看，条件判断、划分点计算、递归左右部分的过程还是比较清晰的。主要不同之处在于最后一步上，在归并排序中，通过递归后的归并步骤实现对几个有序子序列的合并，而快速排序则通过划分时的处理阶段已经使其中某个元素在最后的位置上了。最大子序列和的实现在最后返回的语句中有很明显的综合序列答案的过程，不过这里情况比较特殊，实际上是对三种情况进行选优选择。
+
+
 ---
 
 ## 动态规划
 
 ### 基本概念
 
-每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生的，所以这种多借点优化决策解问题的过程就称为动态规划。
+每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生的，所以这种多节点优化决策解问题的过程就称为动态规划。
 
 ### 基本思路及策略
 
@@ -179,6 +255,47 @@ T(n) = n•log<sub>2</sub>n - n + 1
 
 整个求解过程可以用最优决策表来描述，最优决策表是一个二维表，其中行表示决策的阶段，列表示问题的状态，表格需要填写数据对应此问题在某个阶段某个状态下的最优值，填表过程就是根据递推关系从第一行第一列开始依次填表，最后通过简单读表即可得到最优解。
 
+### 基本框架
+
+这里举三个例子（0-1背包、最长上升子序列和最大子序列和），其中最大子序列和也是分治部分的例子。
+
+1. 0-1背包：
+
+		int max(int i, int j)		{			if((DP[i - 1][j - items[i].weight] + items[i].value) > DP[i - 1][j])				return DP[i -1][j - items[i].weight] + items[i].value;			else				return DP[i -1][j];		}		void pack(){			int i, j;			for(i = 1; i < ITEM_NUM; ++i){				for(j = 1; j < BAG_SIZE; ++j){					if(j < items[i].weight){						DP[i][j] = DP[i - 1][j];						continue;					}					DP[i][j] = max(i, j);				}					}		}
+2. 最长上升子序列：
+
+		int SubUp(int *array, int *max, int length)
+		{
+			max[0] = 1;
+			for(int i = 1; i < length; ++i){
+				int len = 0;
+				for(int j = 0; j < i; ++j){
+					if(array[j] < array[i]){
+						int len = max[j] + 1;
+						if(len > max[i])
+							max[i] = len;
+					}
+				}
+			}
+			return max[length - 1];
+		}
+
+3. 最大子序列和：
+
+		int MaxSubSum(int A[], int N)
+		{
+			int ThisSum, MaxSum, i;
+			ThisSum = MaxSum = 0;
+			for(int i = 0; i < N; ++i){
+				ThisSum += A[i];
+				if(ThisSum > MaxSum)
+					MaxSum = ThisSum;
+				else if(ThisSum < 0)
+					ThisSum = 0;
+			}
+			return MaxSum;
+		}
+		
 ---
 
 ## 贪心算法
@@ -211,11 +328,11 @@ T(n) = n•log<sub>2</sub>n - n + 1
 
 ### 回溯法一般步骤
 
-1. 针对问题，确定问题解空间
+1. 针对问题，确定问题解空间。
 
-2. 确定节点扩展搜索规则
+2. 确定节点扩展搜索规则。
 
-3. 以深度优先方式搜索解空间，在搜索过程中用剪枝函数避免无效搜索
+3. 以深度优先方式搜索解空间，在搜索过程中用剪枝函数避免无效搜索。
 
 
 ---
