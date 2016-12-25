@@ -873,9 +873,9 @@ FP树挖掘的过程由长度为1的频繁模式开始，构造它的条件模�
 
 - P(student = yes | buys_computer = yes) = 6/ 9 = 0.667
 
-- P(student = no | buys_computer = no) = 1 / 5 = 0.2
+- P(student = yes | buys_computer = no) = 1 / 5 = 0.2
 
-- P(cridit_rating = excellent | buys_computer = yes) = 6 / 9 = 0.667
+- P(cridit_rating = fair | buys_computer = yes) = 6 / 9 = 0.667
 
 - P(cridit_rating = fair | buys_computer = no) = 2 / 5 = 0.4
 
