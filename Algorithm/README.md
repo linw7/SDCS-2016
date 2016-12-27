@@ -261,7 +261,27 @@ T(n) = n•log<sub>2</sub>n - n + 1
 
 1. 0-1背包：
 
-		int max(int i, int j)		{			if((DP[i - 1][j - items[i].weight] + items[i].value) > DP[i - 1][j])				return DP[i -1][j - items[i].weight] + items[i].value;			else				return DP[i -1][j];		}		void pack(){			int i, j;			for(i = 1; i < ITEM_NUM; ++i){				for(j = 1; j < BAG_SIZE; ++j){					if(j < items[i].weight){						DP[i][j] = DP[i - 1][j];						continue;					}					DP[i][j] = max(i, j);				}					}		}
+		int max(int i, int j)
+		{
+			if((DP[i - 1][j - items[i].weight] + items[i].value) > DP[i - 1][j])
+				return DP[i -1][j - items[i].weight] + items[i].value;
+			else
+				return DP[i -1][j];
+		}
+
+		void pack(){
+			int i, j;
+			for(i = 1; i < ITEM_NUM; ++i){
+				for(j = 1; j < BAG_SIZE; ++j){
+					if(j < items[i].weight){
+						DP[i][j] = DP[i - 1][j];
+						continue;
+					}
+					DP[i][j] = max(i, j);
+				}		
+			}
+		}
+
 2. 最长上升子序列：
 
 		int SubUp(int *array, int *max, int length)
@@ -360,19 +380,23 @@ T(n) = n•log<sub>2</sub>n - n + 1
 
 ![子集树](./子集树.png)
 
+C为背包初始大小，C<sub>w</sub>为背包剩余大小，C<sub>v</sub>表示背包当前价值。
+
+v<sub>ｉ</sub>表示第i个背包价值，w<sub>i</sub>表示第i个背包重量。
+
 - 初始时，C<sub>w</sub> = C = 30，C<sub>v</sub> = 0，A是唯一活节点。
 
 - 搜索A节点子节，A成为拓展节点。
 
 - 拓展A达到B节点
 
-	- C<sub>w</sub> = C<sub>w</sub> - C<sub>1</sub> = 14，C<sub>v</sub> = C<sub>v</sub> + V<sub>1</sub> = 45
+	- C<sub>w</sub> = C<sub>w</sub> - w<sub>1</sub> = 14，C<sub>v</sub> = C<sub>v</sub> + v<sub>1</sub> = 45
 	
 	- 此时A、B为活节点，拓展B，B成为当前拓展节点。
 	
 	- 拓展B到达D。
 	
-		- 由于C<sub>w</sub> < C<sub>2</sub>，D导致不可行解，回溯到B。
+		- 由于C<sub>w</sub> < w<sub>2</sub>，D导致不可行解，回溯到B。
 		
 	- 拓展B到E。
 	
