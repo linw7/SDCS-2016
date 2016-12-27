@@ -388,7 +388,7 @@ v<sub>ｉ</sub>表示第i个背包价值，w<sub>i</sub>表示第i个背包重�
 
 - 搜索A节点子节，A成为拓展节点。
 
-- 拓展A达到B节点
+- 拓展A达到B节点。
 
 	- C<sub>w</sub> = C<sub>w</sub> - w<sub>1</sub> = 14，C<sub>v</sub> = C<sub>v</sub> + v<sub>1</sub> = 45
 	
