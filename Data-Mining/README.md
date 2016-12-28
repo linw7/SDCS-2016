@@ -728,7 +728,6 @@ FP树挖掘的过程由长度为1的频繁模式开始，构造它的条件模�
 同理可以得到I3和I1的频繁模式。
 
 
-
 ---
 
 ## 分类和预测
@@ -779,46 +778,46 @@ FP树挖掘的过程由长度为1的频繁模式开始，构造它的条件模�
 ![例子](./picture/8-2.png)
 
 1. 信息增益：ID3使用信息增益作为属性选择度量。该例中，D是标记类元组的训练集，类标号属性buys_computer有两个不同的值{yes, no}，因此有两个不同的类，类C<sub>1</sub>对应yes，类C<sub>2</sub>对应no。类yes有9个元组，类no有5个元组。	
-	- 计算期望信息
+	- 计算期望信息：
 	
 	![期望信息](./picture/8-3.png)
 	
-	- 计算按A划分对D的元组分类所需的期望信息
+	- 计算按A划分对D的元组分类所需的期望信息：
 	
 	![按A划分对D的元组分类所需的期望信息](./picture/8-4.png)
 	
-	- 计算信息增益
+	- 计算信息增益：
 	
 	![计算信息增益](./picture/8-5.png)
 	
 	- 以age属性为例。
 
-    1. Info(D) = -(9/14)log<sub>2</sub>(9/14)-(5/9)log<sub>2</sub>(5/9) = 0.940位 
+    		1. Info(D) = -(9/14)log<sub>2</sub>(9/14)-(5/9)log<sub>2</sub>(5/9) = 0.940位 
     
-    2. Info<sub>age</sub>(D) = (5/14)•[-(2/5)log<sub>2</sub>(2/5)-(3/5)log<sub>2</sub>(3/5)]+(4/14)•[-(4/4)log<sub>2</sub>(4/4)-(0/4)log<sub>2</sub>(0/4)]+(4/14)•[-(3/5)log<sub>2</sub>(3/5)-(2/5)log<sub>2</sub>(2/5)] = 0.694位
+    		2. Info<sub>age</sub>(D) = (5/14)•[-(2/5)log<sub>2</sub>(2/5)-(3/5)log<sub>2</sub>(3/5)]+(4/14)•[-(4/4)log<sub>2</sub>(4/4)-(0/4)log<sub>2</sub>(0/4)]+(4/14)•[-(3/5)log<sub>2</sub>(3/5)-(2/5)log<sub>2</sub>(2/5)] = 0.694位
     
-    3. Gain(age) = Info(D) - Info<sub>age</sub>(D) = 0.940 - 0.694 = 0.246位
+    		3. Gain(age) = Info(D) - Info<sub>age</sub>(D) = 0.940 - 0.694 = 0.246位
     
-    4. 计算所有属性增益值，选取最高的作为分裂属性。
+   		4. 计算所有属性增益值，选取最高的作为分裂属性。
 
 
 2. 增益率：C4.5使用增益率作为属性选择度量。
 
-	- 计算分裂信息
+	- 计算分裂信息：
 	
 	![计算分裂信息](./picture/8-6.png)
 	
-	- 计算增益率(增益信息Gain(A)同上)
-	
+	- 计算增益率(增益信息Gain(A)同上)：	
+
 	![计算增益率](./picture/8-7.png)
 	
 	- 以income属性为例。
 	
-	1. SplitInfo<sub>A</sub>(D) = -(4/14)log<sub>2</sub>(4/14)-(6/14)log<sub>2</sub>(6/14)-(4/14)log<sub>2</sub>(4/14) = 1.557
+		1. SplitInfo<sub>A</sub>(D) = -(4/14)log<sub>2</sub>(4/14)-(6/14)log<sub>2</sub>(6/14)-(4/14)log<sub>2</sub>(4/14) = 1.557
 	
-	2. Gain(income) = 0.029
+		2. Gain(income) = 0.029
 	
-	3. GainRatio(income) = Gain(income) / SpiltInfo<sub>A</sub>(D) = 0.029 / 1.557 = 0.019
+		3. GainRatio(income) = Gain(income) / SpiltInfo<sub>A</sub>(D) = 0.029 / 1.557 = 0.019
 
 #### 贝叶斯分类
 
