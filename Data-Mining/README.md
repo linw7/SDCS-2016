@@ -794,7 +794,7 @@ FP树挖掘的过程由长度为1的频繁模式开始，构造它的条件模�
 
     	1. Info(D) = -(9/14)log<sub>2</sub>(9/14)-(5/9)log<sub>2</sub>(5/9) = 0.940位 
     
-    	2. Info<sub>age</sub>(D) = (5/14)•[-(2/5)log<sub>2</sub>(2/5)-(3/5)log<sub>2</sub>(3/5)]+(4/14)•[-(4/4)log<sub>2</sub>(4/4)-(0/4)log<sub>2</sub>(0/4)]+(4/14)•[-(3/5)log<sub>2</sub>(3/5)-(2/5)log<sub>2</sub>(2/5)] = 0.694位
+    	2. Info<sub>age</sub>(D) = (5/14)•[-(2/5)log<sub>2</sub>(2/5)-(3/5)log<sub>2</sub>(3/5)]+(4/14)•[-(4/4)log<sub>2</sub>(4/4)-(0/4)log<sub>2</sub>(0/4)]+(５/14)•[-(3/5)log<sub>2</sub>(3/5)-(2/5)log<sub>2</sub>(2/5)] = 0.694位
     
     	3. Gain(age) = Info(D) - Info<sub>age</sub>(D) = 0.940 - 0.694 = 0.246位
     
@@ -813,7 +813,7 @@ FP树挖掘的过程由长度为1的频繁模式开始，构造它的条件模�
 	
 	- 以income属性为例。
 	
-		1. SplitInfo<sub>A</sub>(D) = -(4/14)log<sub>2</sub>(4/14)-(6/14)log<sub>2</sub>(6/14)-(4/14)log<sub>2</sub>(4/14) = 1.557
+		1. SplitInfo<sub>A</sub>(D) = -(4/14)log<sub>2</sub>(4/14)-(6/14)log<sub>2</sub>(6/14)-(４/14)log<sub>2</sub>(4/14) = 1.557
 	
 		2. Gain(income) = 0.029
 	
